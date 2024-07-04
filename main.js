@@ -3,6 +3,8 @@ const E = {
   word: document.getElementById("word"),
   dictResult: document.getElementById("result"),
 };
+
+
 class Jastrow {
 	static async serverLookup(word) {
 		const options = { method: 'GET', headers: { accept: 'application/json'} }
@@ -11,7 +13,7 @@ class Jastrow {
 		const found = [];
 		for (const entry of results) {
 			if (entry['parent_lexicon'] == 'Jastrow Dictionary')
-				entry['content']['senses'].forEach(a => found.push(a['definition']));
+				found.push(entry['content']['senses'].map(a => a['definition']).join(";<br>"));
 		}
     console.log(found);
 		return found;
