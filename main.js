@@ -13,7 +13,7 @@ class Jastrow {
 		const found = [];
 		for (const entry of results) {
 			if (entry['parent_lexicon'] == 'Jastrow Dictionary')
-				found.push(entry['content']['senses'].map(a => "*) " + a['definition']).join());
+				found.push(entry['content']['senses'].map(a => `<p>*) + ${a['definition']}</p>`).join());
 		}
     console.log(found);
 		return found;
