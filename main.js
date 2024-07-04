@@ -12,7 +12,7 @@ class Jastrow {
 		const results = await response.json();
 		const found = [];
 		for (const entry of results) {
-			if (entry['parent_lexicon'] == 'Jastrow Dictionary') {
+			if (entry.parent_lexicon == 'Jastrow Dictionary') {
 				found.push(`${entry.headword}, ${(entry.alt_headwords || []).join(", ")} ${entry.content.senses.map(a => `<p>*) ${a.definition}</p>`).join()}`);
     				console.log(entry.content.senses.map(a => Object.keys(a)).join(","));
 			}
