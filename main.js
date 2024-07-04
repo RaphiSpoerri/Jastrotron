@@ -13,7 +13,8 @@ class Jastrow {
 		const found = [];
 		for (const entry of results) {
 			if (entry.parent_lexicon == 'Jastrow Dictionary') {
-				found.push(`${entry.headword}, ${(entry.alt_headwords || []).join(", ")} ${entry.content.senses.map(a => `<p>*) ${a.definition}</p>`).join()}`);
+				found.push(`${entry.headword}, ${(entry.alt_headwords || []).join(", ")} ${entry.content.senses.map(a => `<p>*) ${
+					a.language_code} ${a.binyan_form.join(", ")} ${a.verbal_stem} ${a.definition}</p>`).join()}`);
     				console.log(entry.content.senses.map(a => Object.keys(a)).join(","));
 			}
 		}
