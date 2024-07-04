@@ -15,8 +15,8 @@ class Jastrow {
 			if (entry['parent_lexicon'] == 'Jastrow Dictionary')
 				found.push(`${entry.headword} (${entry.alt_headwords.join(", ")}) ${
 					entry.content.senses.map(a => `<p>*) + ${a.definition}</p>`).join()}`);
+    			console.log(found);
 		}
-    console.log(found);
 		return found;
 	}
 }
