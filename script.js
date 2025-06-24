@@ -1,8 +1,13 @@
 
-const E = {
+const Elem = {
   word: document.getElementById("word"),
+  keyboard: document.getElementById("keyboard"),
   dictResult: document.getElementById("result"),
 };
+
+Array.prototype.joinOrBlank = function(sep) {
+	return this.length == 0 ? "" : this.join(sep);
+}
 
 function strObj(a, tab = '') {
 	if (Array.isArray(a)) return `[${a.map(b => strObj(b, tab + '  ')).join(", ")}]`;
@@ -15,21 +20,18 @@ function strObj(a, tab = '') {
 	return result + tab + '}';
 }
 
-class Jastrow {
-	static async serverLookup(word) {
-		const options = { method: 'GET', headers: { accept: 'application/json'} }
-		const response = await fetch(`https://www.sefaria.org/api/words/${word}`, options);
-		const results = await response.json();
-		const found = [];
-		for (const entry of results) {
-			if (entry.parent_lexicon == 'Jastrow Dictionary') {
-				console.log(strObj(entry));
-				found.push(`${entry.headword} ${(entry.alt_headwords || []).join(", ")} ${entry.language_code} ${entry.content.senses.map(a => `${a.grammar?.verbal_stem ?? ""} - ${a.grammar?.binyan_form?.join(", ") ?? ""} ${a.definition ?? a.senses.map((a, i) => `${a.definition}`).join("<br/>")}<br/>`).join()}`);
-			}
-		}
-		return found;
-	}
-}
 async function search() {
-  E.dictResult.innerHTML = (await Jastrow.serverLookup(E.word.value)).join("<br>");
+  Elem.dictResult.innerHTML = (await Jastrow.serverLookup(Elem.word.value)).join("<br>");
 }
+
+const keyboard = new Keyboard(Elem.word, Elem.keyboard, {
+	a: 'א', b: 'ב', g: 'ג',
+	d: 'ד', h: 'ה', v: 'ו',
+	z: 'ז', x: 'ח', T: 'ט', f: 'ט',
+	y: 'י', k: 'כ', l: 'ל',
+	m: 'מ', n: 'נ', s: 'ס',
+	j: 'ע', p: 'פ', c: 'צ',
+	q: 'ק', r: 'ר', w: 'ש',
+	t: 'ת'
+	//               
+});
