@@ -20,7 +20,6 @@ class Keyboard {
     }
 
     showOnscreen() {
-        console.log("called");
         const ones = document.createElement('tr');
         const tens = document.createElement('tr');
         const hundreds = document.createElement('tr');
@@ -41,7 +40,6 @@ class Keyboard {
     _onkeydownCallback(e) {
         const letter = this._keyMap[e.key];
         
-        console.log(e.key);
         if (letter !== undefined) {
             e.preventDefault();
             this._insertText(letter);
