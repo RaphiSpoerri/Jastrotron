@@ -19,3 +19,17 @@ html {
 #instruct {
 	color: white;
 }
+
+td {
+	text-align: center;
+	vertical-align: middle;
+}
+tr {
+	display: flex; justify-content: center;
+}
+#keyboard tr,td {
+	border: 1px solid black;
+}
+.keyboard-key {
+	width: 30px;
+}
