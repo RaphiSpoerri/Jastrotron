@@ -2,8 +2,8 @@
 const parser = new DOMParser();
 
 function toggle(text) {
-    return `<span><button onclick="const s = this.parentNode.getElementsByTagName('div')[0];\
-            s.style.display = s.style.display == 'block' ? 'none' : 'block'">⊕</button> \
+    return `<span><span class="quotes-button" onclick="const s = this.parentNode.getElementsByTagName('div')[0];\
+            s.style.display = s.style.display == 'block' ? 'none' : 'block'">[more]</span> \
         <div style="display: none;">${text}</div>
         </span>`
 }
@@ -35,8 +35,9 @@ function formatQuotes(text) {
         quotes = text;
     } else {
         italics = `<i>${m[1]}</i>`;
-        quotes = text.substring(text.indexOf('</i>', i) + 4).replace(/<a/g, '<br/><a').replace(/href=(["'])/g, `target="_blank" href=$1https://www.sefaria.org`);
+        quotes = text.substring(text.indexOf('</i>', i) + 4);
     }
+    quotes = quotes.replace(/<a/g, '<br/><a').replace(/href=(["'])/g, `target="_blank" href=$1https://www.sefaria.org`);
     if (quotes.trim() == ',]') {
         result += `[${italics}]`;
     } else result += `${italics} - ${toggle(quotes)}`;
