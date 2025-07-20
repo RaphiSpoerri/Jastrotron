@@ -22,10 +22,10 @@ function formatQuotes(text) {
     quotes = quotes.replace(/<a/g, '<br/><a').replace(/<a[^>]+>[^<]+<\/a>/g, m => {
         const parts = /href="\/Jastrow,([^"]+)"[^>]*>([^<]*)/.exec(m);
         if (parts == null) {
-            return m;
+            return m.replace(/<a/g, '<br/><a').replace(/href=(["'])/g, `target="_blank" href=$1https://www.sefaria.org`);
         }
         console.log("=>" + parts[1]);
-        return `<button onclick="search('${/[\u0590-\u05f0]+/.exec(parts[1])[0]}')">${parts[2]}</button>`;
+        return `<u style="color:blue;" onclick="search('${/[\u0590-\u05f0]+/.exec(parts[1])[0]}')">${parts[2]}</u>`;
     });
     if (quotes.trim() == ',]') {
         result += `[${italics}]`;
