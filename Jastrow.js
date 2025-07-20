@@ -60,6 +60,6 @@ class Jastrow {
 				found.push(`${result.headword}${(result.alt_headwords ?? []).map(a => ", " + a).joinOrBlank("")} ${result.language_code ?? "?"} ${/^[^\(]*\)/.exec(first.definition)?.[0] ?? ''} <ul>${entries}</ul>`);
 			}
 		}
-		return found;
+		return found.length == 0 ? [`<span style="color: red;">word not found</span>`] : found;
 	}
 }
