@@ -24,7 +24,7 @@ function formatQuotes(text) {
         if (parts == null) {
             return m;
         }
-        return `<button onclick="search('${parts[1]}')">${parts[2]}</button>`;
+        return `<button onclick="search('${parts[1].split(' ')[0]}')">${parts[2]}</button>`;
     });
     if (quotes.trim() == ',]') {
         result += `[${italics}]`;
