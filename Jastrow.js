@@ -20,12 +20,12 @@ function formatQuotes(text) {
         quotes = text.substring(text.indexOf('</i>', i) + 4);
     }
     quotes = quotes.replace(/<a/g, '<br/><a').replace(/<a[^>]+>[^<]+<\/a>/g, m => {
-        const parts = /href="\/Jastrow,_1.([^"]+)"[^>]*>([^<]*)/.exec(m);
+        const parts = /href="\/Jastrow,([^"]+)"[^>]*>([^<]*)/.exec(m);
         if (parts == null) {
             return m;
         }
         console.log("=>" + parts[1]);
-        return `<button onclick="search('${parts[1]}')">${parts[2]}</button>`;
+        return `<button onclick="search('${/[\u0590-\u05f0]+/.exec(parts[1])[0]}')">${parts[2]}</button>`;
     });
     if (quotes.trim() == ',]') {
         result += `[${italics}]`;
