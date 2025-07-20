@@ -31,7 +31,7 @@ async function search() {
 
 const keyboard = new Keyboard(Elem.word, Elem.keyboard, {
 	a: 'א', b: 'ב', g: 'ג',
-	d: 'ד', h: 'ה', u: 'ו', w: 'ו', v: 'ו',
+	d: 'ד', h: 'ה', u: 'ו', w: 'ו', v: 'ו', u: 'ו',
 	z: 'ז', x: 'ח', T: 'ט', H: 'ח',
 	i: 'י', k: 'כ', l: 'ל', y: 'י',
 	m: 'מ', n: 'נ', s: 'ס',
