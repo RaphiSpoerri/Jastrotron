@@ -9,6 +9,11 @@ Array.prototype.joinOrBlank = function(sep) {
 	return this.length == 0 ? "" : this.join(sep);
 }
 
+async function redirect(to) {
+	Elem.word.value = to;
+	await search();
+}
+
 function strObj(a, tab = '') {
 	if (Array.isArray(a)) return `[${a.map(b => strObj(b, tab + '  ')).join(", ")}]`;
 	if (a instanceof String || typeof a == 'string') return `"${a}"`;
@@ -26,12 +31,12 @@ async function search() {
 
 const keyboard = new Keyboard(Elem.word, Elem.keyboard, {
 	a: 'א', b: 'ב', g: 'ג',
-	d: 'ד', h: 'ה', v: 'ו',
-	z: 'ז', x: 'ח', T: 'ט', f: 'ט',
-	y: 'י', k: 'כ', l: 'ל',
+	d: 'ד', h: 'ה', u: 'ו', w: 'ו', v: 'ו',
+	z: 'ז', x: 'ח', T: 'ט', H: 'ח',
+	i: 'י', k: 'כ', l: 'ל', y: 'י',
 	m: 'מ', n: 'נ', s: 'ס',
-	j: 'ע', p: 'פ', c: 'צ',
-	q: 'ק', r: 'ר', w: 'ש',
+	j: 'ע', p: 'פ', S: 'צ', f: 'פ',
+	q: 'ק', r: 'ר', c: 'ש', 
 	t: 'ת'
 	//               
 });

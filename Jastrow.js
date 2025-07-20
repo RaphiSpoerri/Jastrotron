@@ -1,5 +1,4 @@
 
-const parser = new DOMParser();
 
 function toggle(text) {
     return `<span><span class="quotes-button" onclick="const s = this.parentNode.getElementsByTagName('div')[0];\
@@ -10,24 +9,7 @@ function toggle(text) {
 function formatQuotes(text) {
     let i = text.indexOf('<i');
     let result = "";
-    // for (; i < text.length;) {
-    //     let j = text.indexOf('<i', i + 1);
-    //     if (j == -1) j = text.length;
-    //     const m = />([^<]*)<\/i>((?:.|\n)*)/.exec(text.substring(i, j));
-    //     if (m == null) {
-    //         const remaining = text.slice(i);
-    //         console.log(remaining);
-    //         if (remaining.trim() != "")
-    //             result += remaining;
-    //         break;
-    //     }
-    //     const [_, italics, quotes] = m;
-    //     if (quotes.trim() == ',]') {
-    //         result += `<li>[<i>${italics}</i>]</li>`;
-    //     } else result += `<li><i>${italics}</i> - ${toggle(quotes)}</li>`;
-    //     i = j;
-    // }
-    
+
     const m = />([^<]*)<\/i>/.exec(text.substring(i));
     let italics, quotes;
     if (m === null) {
@@ -37,7 +19,7 @@ function formatQuotes(text) {
         italics = `<i>${m[1]}</i>`;
         quotes = text.substring(text.indexOf('</i>', i) + 4);
     }
-    quotes = quotes.replace(/<a/g, '<br/><a').replace(/href=(["'])/g, `target="_blank" href=$1https://www.sefaria.org`);
+    quotes = quotes.replace(/<a/g, '<br/><a').replace(/href=\"\//g,`target="_blank" href="https://www.sefaria.org/`);
     if (quotes.trim() == ',]') {
         result += `[${italics}]`;
     } else result += `${italics} - ${toggle(quotes)}`;
