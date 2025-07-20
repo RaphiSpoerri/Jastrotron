@@ -46,7 +46,7 @@ class Jastrow {
 		try {
             response = await fetch(`https://www.sefaria.org/api/words/${word}`, options);
         } catch (e) {
-            if (e instanceof TypeError) return `<span style="color: red;">no internet</span>`;
+            if (e instanceof TypeError) return [`<span style="color: red;">no internet</span>`];
             else throw e;
         }
         const results = await response.json();
