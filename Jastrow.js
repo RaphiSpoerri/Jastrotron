@@ -20,7 +20,7 @@ function formatQuotes(text) {
         quotes = text.substring(text.indexOf('</i>', i) + 4);
     }
     quotes = quotes.replace(/<a/g, '<br/><a').replace(/<a[^>]+>[^<]+<\/a>/g, m => {
-        const parts = /href="\/Jastrow,([^"]+)"[^>]*>([^<]*)/.exec(m);
+        const parts = /href="\/Jastrow,_1.([^"]+)"[^>]*>([^<]*)/.exec(m);
         if (parts == null) {
             return m;
         }
