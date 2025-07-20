@@ -25,8 +25,9 @@ function strObj(a, tab = '') {
 	return result + tab + '}';
 }
 
-async function search() {
-  Elem.dictResult.innerHTML = (await Jastrow.serverLookup(Elem.word.value)).join("<br>");
+async function search(word) {
+	if (word === undefined) word = Elem.word.value;
+	Elem.dictResult.innerHTML = (await Jastrow.serverLookup(word)).join("<br>");
 }
 
 const keyboard = new Keyboard(Elem.word, Elem.keyboard, {

@@ -13,13 +13,19 @@ function formatQuotes(text) {
     const m = />([^<]*)<\/i>/.exec(text.substring(i));
     let italics, quotes;
     if (m === null) {
-        italics = /^\s*\<a[^\>]+>same/.test(text) ? "(same)" : '';
+        italics = /^\s*\<a[^\>]+>same/.test(text) ? "(same)" : '(more)';
         quotes = text;
     } else {
         italics = `<i>${m[1]}</i>`;
         quotes = text.substring(text.indexOf('</i>', i) + 4);
     }
-    quotes = quotes.replace(/<a/g, '<br/><a').replace(/href=\"\//g,`target="_blank" href="https://www.sefaria.org/`);
+    quotes = quotes.replace(/<a/g, '<br/><a').replace(/<a[^>]+>[^<]+<\/a>/g, m => {
+        const parts = /href="\/Jastrow,([^"]+)"[^>]*>([^<]*)/.exec(m);
+        if (parts == null) {
+            return m;
+        }
+        return `<button onclick="search('${parts[1]}')">${parts[2]}</button>`;
+    });
     if (quotes.trim() == ',]') {
         result += `[${italics}]`;
     } else result += `${italics} - ${toggle(quotes)}`;
