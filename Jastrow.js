@@ -47,13 +47,16 @@ function formatDefinition(obj) {
 
 class Jastrow {
 	static async serverLookup(word) {
+        if (word.trim() == "") return [`nothing to search for`];
         word = word.replace(/[כמנפצ]$/, m => String.fromCharCode(m[0].charCodeAt(0) - 1))
 		const options = { method: 'GET', headers: { accept: 'application/json'} };
         let response;
 		try {
             response = await fetch(`https://www.sefaria.org/api/words/${word}`, options);
         } catch (e) {
-            if (e instanceof TypeError) return [`<span style="color: red;">no internet</span>`];
+            if (e instanceof TypeError) {
+                return [`<span style="color: red;">no internet</span>`];
+            }
             else throw e;
         }
         const results = await response.json();

@@ -4,11 +4,23 @@ html {
 	background-color: blue;
 }
 
+#word {
+	text-align: right;
+	width: calc(75% - 30px);
+	height: 30px;
+	font-size: 20px;
+	font-family: 'Times New Roman';
+	resize: none;
+	margin: 0px 0px 0px 0px;
+}
 #search {
-	background-color: lime;
-	border-radius: 20px;
-	border: 2px solid red;
+	margin: 0px 0px 0px 0px;
+	background-color: white;
+	border-radius: 3px;
+	border: 2px solid#0000bb;
+	color: 0000bb;
 	font-family: monospace;
+	width: 25%;
 	font-size: 30px;
 }
 
@@ -30,6 +42,11 @@ tr {
 }
 #keyboard tr,td {
 	border: 1px solid black;
+	border-radius: 3px;
+	color: black;
+}
+#keyboard {
+	width: 100%;
 }
 .keyboard-key {
 	width: 100%;
