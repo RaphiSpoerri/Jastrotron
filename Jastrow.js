@@ -64,7 +64,7 @@ class Jastrow {
 				console.log(result);
                 const first = result.content.senses[0];
 				const entries = result.content.senses.map(a => formatDefinition(a)).join('<br/>');
-				found.push(`${result.headword}${(result.alt_headwords ?? []).map(a => ", " + a).joinOrBlank("")} ${result.language_code ?? "?"} ${/^[^\(]*\)/.exec(first.definition)?.[0] ?? ''} <ul>${entries}</ul>`);
+				found.push(`${result.headword}${(result.alt_headwords ?? []).map(a => ", " + a).joinOrBlank("")} ${result.language_code ?? "m.h."} ${/^[^\(]*\)/.exec(first.definition)?.[0] ?? ''} <ul>${entries}</ul>`);
 			}
 		}
 		return found.length == 0 ? [`<span style="color: red;">word not found</span>`] : found;

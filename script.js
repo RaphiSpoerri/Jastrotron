@@ -9,11 +9,6 @@ Array.prototype.joinOrBlank = function(sep) {
 	return this.length == 0 ? "" : this.join(sep);
 }
 
-async function redirect(to) {
-	Elem.word.value = to;
-	await search();
-}
-
 function strObj(a, tab = '') {
 	if (Array.isArray(a)) return `[${a.map(b => strObj(b, tab + '  ')).join(", ")}]`;
 	if (a instanceof String || typeof a == 'string') return `"${a}"`;

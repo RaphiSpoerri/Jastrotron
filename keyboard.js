@@ -33,6 +33,7 @@ class Keyboard {
         table.appendChild(tens);
         table.appendChild(hundreds);
     }
+
     _insertText(text) {
         const { selectionStart: start, selectionEnd: end } = this._output;
         this._output.setRangeText(text, start, end, 'end');
