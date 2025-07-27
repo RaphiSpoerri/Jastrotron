@@ -44,24 +44,26 @@ function formatDefinition(obj) {
     
     return `${verbal_stem}${binyan_form} ${definition}`;
 }
-
+function red(text) {
+    return `<span style="color: red;">${text}</span>`;
+}
 class Jastrow {
-	static async serverLookup(word) {
-        if (word.trim() == "") return [`nothing to search for`];
+	static async serverLookup(word, signal) {
+        if (!navigator.onLine) return red`No internet.`;
+        if (word.trim() == "") return red`Nothing to search for.`;
+
         word = word.replace(/[כמנפצ]$/, m => String.fromCharCode(m[0].charCodeAt(0) - 1))
-		const options = { method: 'GET', headers: { accept: 'application/json'} };
+
+
+        const options = { method: 'GET', headers: { accept: 'application/json'}, signal};
         let response;
-		try {
+        try {
             response = await fetch(`https://www.sefaria.org/api/words/${word}`, options);
         } catch (e) {
-            if (e instanceof TypeError) {
-                return [`<span style="color: red;">no internet</span>`];
-            }
-            else throw e;
+            return red(`${e}`);
         }
         const results = await response.json();
-		const found = [];
-		console.log(results);
+        const found = [];
 		for (const result of results) {
 			if (result.parent_lexicon == 'Jastrow Dictionary') {
 				console.log(result);
@@ -70,6 +72,8 @@ class Jastrow {
 				found.push(`${result.headword}${(result.alt_headwords ?? []).map(a => ", " + a).joinOrBlank("")} ${result.language_code ?? "m.h."} ${/^[^\(]*\)/.exec(first.definition)?.[0] ?? ''} <ul>${entries}</ul>`);
 			}
 		}
-		return found.length == 0 ? [`<span style="color: red;">word not found</span>`] : found;
+		return found.length == 0 ? red`Word not found.` : found.join("<br>");
+        
+		
 	}
 }

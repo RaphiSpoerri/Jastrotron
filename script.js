@@ -22,7 +22,27 @@ function strObj(a, tab = '') {
 
 async function search(word) {
 	if (word === undefined) word = Elem.word.value;
-	Elem.dictResult.innerHTML = (await Jastrow.serverLookup(word)).join("<br>");
+	Elem.dictResult.innerHTML = 'loading';
+
+	const ac = new AbortController();
+        
+
+	Elem.dictResult.innerHTML = await new Promise(resolve => {
+		let i = 0;
+		const loading = setInterval(() => {
+			Elem.dictResult.innerHTML = `loading.${'.'.repeat(i++ % 3)}`;
+		}, 50);
+		const canceler = setTimeout(() => {
+			ac.abort();
+			clearInterval(loading);
+			resolve(red`Connection timed out.`);
+		}, 3000);
+		Jastrow.serverLookup(word, ac.signal).then(t => {
+			clearTimeout(canceler);
+			clearInterval(loading);
+			resolve(t);
+		});
+	});
 }
 
 const keyboard = new Keyboard(Elem.word, Elem.keyboard, {
