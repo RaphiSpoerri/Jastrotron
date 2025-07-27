@@ -31,7 +31,7 @@ async function search(word) {
 		let i = 0;
 		const loading = setInterval(() => {
 			Elem.dictResult.innerHTML = `loading.${'.'.repeat(i++ % 3)}`;
-		}, 50);
+		}, 100);
 		const canceler = setTimeout(() => {
 			ac.abort();
 			clearInterval(loading);
