@@ -5,11 +5,14 @@ html {
 }
 
 #word {
+	unicode-bidi: bidi-override;
 	vertical-align: middle;
 	margin: 0;
 	padding: 2px;
 	border-width: 1px;
 	height: 30px;
+
+    direction: rtl;
 	text-align: right;
 	width: calc(100% - 6px);
 	font-size: 20px;
